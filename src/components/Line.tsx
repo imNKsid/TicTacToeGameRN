@@ -1,10 +1,11 @@
 import {StyleSheet, Dimensions, View} from 'react-native';
 import React from 'react';
+import {Colors} from '../styles/colors';
 
 const {width, height} = Dimensions.get('window');
 
 interface LineProps {
-  showWinnerLine: String; //snake prop is an array of 'Coordinate' objects x & y.
+  showWinnerLine: String;
 }
 
 const Line = ({showWinnerLine}: LineProps) => {
@@ -40,7 +41,7 @@ const Line = ({showWinnerLine}: LineProps) => {
           {
             left:
               showWinnerLine === 'vertical1'
-                ? width / 5.5
+                ? width / 5.65
                 : showWinnerLine === 'vertical2'
                 ? width / 2
                 : width / 1.22,
@@ -71,20 +72,20 @@ const styles = StyleSheet.create({
   horizontalLine: {
     position: 'absolute',
     width: width / 1.2,
-    height: 1,
-    backgroundColor: 'black',
+    height: 4,
+    backgroundColor: Colors.line,
   },
   verticalLine: {
     position: 'absolute',
-    width: 1,
+    width: 4,
     height: height / 2.5,
-    backgroundColor: 'black',
+    backgroundColor: Colors.line,
   },
   diagonalLine: {
     position: 'absolute',
     width: height / 1.8,
     height: 1,
-    borderBottomColor: 'black',
-    borderBottomWidth: 1,
+    borderBottomColor: Colors.line,
+    borderBottomWidth: 4,
   },
 });

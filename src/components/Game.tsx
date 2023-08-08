@@ -12,6 +12,7 @@ import React, {useEffect, useState} from 'react';
 import {checkWinner} from '../utils/checkWinner';
 import {Colors} from '../styles/colors';
 import Line from './Line';
+import Player from './Player';
 
 const {width, height} = Dimensions.get('window');
 
@@ -40,7 +41,6 @@ const Game = () => {
 
   useEffect(() => {
     const winner = checkWinner(markers);
-    console.log(winner);
 
     setShowWinnerLine(winner && winner?.position);
 
@@ -82,166 +82,76 @@ const Game = () => {
 
       <View style={styles.gameContainer}>
         {/* Top Left Cell */}
-        <Pressable
-          style={[styles.cell, styles.cellTopLeft]}
-          onPress={() => markPostion(0)}>
-          {markers[0] === 'X' && (
-            <Image
-              source={require('../assets/images/cross.png')}
-              style={styles.icon}
-            />
-          )}
-          {markers[0] === '0' && (
-            <Image
-              source={require('../assets/images/zero.png')}
-              style={styles.icon}
-            />
-          )}
-        </Pressable>
+        <Player
+          playerStyle={[styles.cell, styles.cellTopLeft]}
+          index={0}
+          markers={markers}
+          markPostion={() => markPostion(0)}
+        />
 
         {/* Top Mid Cell */}
-        <Pressable
-          style={[styles.cell, styles.cellTopMid]}
-          onPress={() => markPostion(1)}>
-          {markers[1] === 'X' && (
-            <Image
-              source={require('../assets/images/cross.png')}
-              style={styles.icon}
-            />
-          )}
-          {markers[1] === '0' && (
-            <Image
-              source={require('../assets/images/zero.png')}
-              style={styles.icon}
-            />
-          )}
-        </Pressable>
+        <Player
+          playerStyle={[styles.cell, styles.cellTopMid]}
+          index={1}
+          markers={markers}
+          markPostion={() => markPostion(1)}
+        />
 
         {/* Top Right Cell */}
-        <Pressable
-          style={[styles.cell, styles.cellTopRight]}
-          onPress={() => markPostion(2)}>
-          {markers[2] === 'X' && (
-            <Image
-              source={require('../assets/images/cross.png')}
-              style={styles.icon}
-            />
-          )}
-          {markers[2] === '0' && (
-            <Image
-              source={require('../assets/images/zero.png')}
-              style={styles.icon}
-            />
-          )}
-        </Pressable>
+        <Player
+          playerStyle={[styles.cell, styles.cellTopRight]}
+          index={2}
+          markers={markers}
+          markPostion={() => markPostion(2)}
+        />
 
         {/* Mid Left Cell */}
-        <Pressable
-          style={[styles.cell, styles.cellMidLeft]}
-          onPress={() => markPostion(3)}>
-          {markers[3] === 'X' && (
-            <Image
-              source={require('../assets/images/cross.png')}
-              style={styles.icon}
-            />
-          )}
-          {markers[3] === '0' && (
-            <Image
-              source={require('../assets/images/zero.png')}
-              style={styles.icon}
-            />
-          )}
-        </Pressable>
+        <Player
+          playerStyle={[styles.cell, styles.cellMidLeft]}
+          index={3}
+          markers={markers}
+          markPostion={() => markPostion(3)}
+        />
 
         {/* Mid Mid Cell */}
-        <Pressable
-          style={[styles.cell, styles.cellMid]}
-          onPress={() => markPostion(4)}>
-          {markers[4] === 'X' && (
-            <Image
-              source={require('../assets/images/cross.png')}
-              style={styles.icon}
-            />
-          )}
-          {markers[4] === '0' && (
-            <Image
-              source={require('../assets/images/zero.png')}
-              style={styles.icon}
-            />
-          )}
-        </Pressable>
+        <Player
+          playerStyle={[styles.cell, styles.cellMid]}
+          index={4}
+          markers={markers}
+          markPostion={() => markPostion(4)}
+        />
 
         {/* Mid Right Cell */}
-        <Pressable
-          style={[styles.cell, styles.cellMidRight]}
-          onPress={() => markPostion(5)}>
-          {markers[5] === 'X' && (
-            <Image
-              source={require('../assets/images/cross.png')}
-              style={styles.icon}
-            />
-          )}
-          {markers[5] === '0' && (
-            <Image
-              source={require('../assets/images/zero.png')}
-              style={styles.icon}
-            />
-          )}
-        </Pressable>
+        <Player
+          playerStyle={[styles.cell, styles.cellMidRight]}
+          index={5}
+          markers={markers}
+          markPostion={() => markPostion(5)}
+        />
 
         {/* Bottom Left Cell */}
-        <Pressable
-          style={[styles.cell, styles.cellBottomLeft]}
-          onPress={() => markPostion(6)}>
-          {markers[6] === 'X' && (
-            <Image
-              source={require('../assets/images/cross.png')}
-              style={styles.icon}
-            />
-          )}
-          {markers[6] === '0' && (
-            <Image
-              source={require('../assets/images/zero.png')}
-              style={styles.icon}
-            />
-          )}
-        </Pressable>
+        <Player
+          playerStyle={[styles.cell, styles.cellBottomLeft]}
+          index={6}
+          markers={markers}
+          markPostion={() => markPostion(6)}
+        />
 
         {/* Bottom Mid Cell */}
-        <Pressable
-          style={[styles.cell, styles.cellBottomMid]}
-          onPress={() => markPostion(7)}>
-          {markers[7] === 'X' && (
-            <Image
-              source={require('../assets/images/cross.png')}
-              style={styles.icon}
-            />
-          )}
-          {markers[7] === '0' && (
-            <Image
-              source={require('../assets/images/zero.png')}
-              style={styles.icon}
-            />
-          )}
-        </Pressable>
+        <Player
+          playerStyle={[styles.cell, styles.cellBottomMid]}
+          index={7}
+          markers={markers}
+          markPostion={() => markPostion(7)}
+        />
 
         {/* Bottom Right Cell */}
-        <Pressable
-          style={[styles.cell, styles.cellBottomRight]}
-          onPress={() => markPostion(8)}>
-          {markers[8] === 'X' && (
-            <Image
-              source={require('../assets/images/cross.png')}
-              style={styles.icon}
-            />
-          )}
-          {markers[8] === '0' && (
-            <Image
-              source={require('../assets/images/zero.png')}
-              style={styles.icon}
-            />
-          )}
-        </Pressable>
+        <Player
+          playerStyle={[styles.cell, styles.cellBottomRight]}
+          index={8}
+          markers={markers}
+          markPostion={() => markPostion(8)}
+        />
 
         {showWinnerLine ? <Line showWinnerLine={showWinnerLine} /> : null}
       </View>
@@ -322,10 +232,6 @@ const styles = StyleSheet.create({
   cellBottomRight: {
     borderRightWidth: 0,
     borderBottomWidth: 0,
-  },
-  icon: {
-    height: 62,
-    width: 62,
   },
   restartBtn: {
     position: 'absolute',
