@@ -1,4 +1,5 @@
 import {
+  Alert,
   Dimensions,
   Image,
   Pressable,
@@ -7,32 +8,74 @@ import {
   Text,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import {checkWinner} from '../utils/checkWinner';
+import {Colors} from '../styles/colors';
+import Line from './Line';
 
 const {width, height} = Dimensions.get('window');
 
 const Game = () => {
   const [activePlayer, setActivePlayer] = useState('X');
   const [markers, setMarkers] = useState(['', '', '', '', '', '', '', '', '']);
+  const [showWinnerLine, setShowWinnerLine] = useState('');
 
   const markPostion = (position: number) => {
-    let temp = [...markers];
-    temp[position] = activePlayer;
-    setMarkers(temp);
+    if (markers[position] === '') {
+      let temp = [...markers];
+      temp[position] = activePlayer;
+      setMarkers(temp);
 
-    if (activePlayer === 'X') {
-      setActivePlayer('0');
-    } else {
-      setActivePlayer('X');
+      if (activePlayer === 'X') {
+        setActivePlayer('0');
+      } else {
+        setActivePlayer('X');
+      }
     }
   };
+
+  const reset = () => {
+    setMarkers(['', '', '', '', '', '', '', '', '']);
+  };
+
+  useEffect(() => {
+    const winner = checkWinner(markers);
+    console.log(winner);
+
+    setShowWinnerLine(winner && winner?.position);
+
+    if (winner && winner?.name === 'X') {
+      Alert.alert('Player X won', '', [
+        {
+          text: 'OK',
+          onPress: () => {
+            reset();
+            setShowWinnerLine('');
+          },
+        },
+      ]);
+    } else if (winner && winner?.name === '0') {
+      Alert.alert('Player O won', '', [
+        {
+          text: 'OK',
+          onPress: () => {
+            reset();
+            setShowWinnerLine('');
+          },
+        },
+      ]);
+    }
+  }, [markers]);
 
   return (
     <SafeAreaView style={styles.container}>
       <View
         style={[
           styles.playerInfo,
-          {backgroundColor: activePlayer === 'X' ? '#007ff4' : '#f40075'},
+          {
+            backgroundColor:
+              activePlayer === 'X' ? Colors.playerX : Colors.player0,
+          },
         ]}>
         <Text style={styles.playerTxt}>Player {activePlayer}'s turn</Text>
       </View>
@@ -199,10 +242,12 @@ const Game = () => {
             />
           )}
         </Pressable>
+
+        {showWinnerLine ? <Line showWinnerLine={showWinnerLine} /> : null}
       </View>
 
       {/* Restart Button */}
-      <Pressable style={styles.restartBtn}>
+      <Pressable style={styles.restartBtn} onPress={reset}>
         <Image
           source={require('../assets/images/replay.png')}
           style={styles.restart}
